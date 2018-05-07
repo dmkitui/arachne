@@ -3,7 +3,7 @@ import sys
 from flask import Flask
 from scrapy import version_info as SCRAPY_VERSION
 
-from arachne.exceptions import SettingsException
+from arachne.exceptions import SettingsException, EndpointException
 from arachne.endpoints import list_spiders_endpoint, run_spider_endpoint
 
 class Arachne(Flask):
@@ -96,7 +96,49 @@ class Arachne(Flask):
         self.add_url_rule('/run-spider/<spider_name>', view_func=run_spider_endpoint)
         self.add_url_rule('/', view_func=list_spiders_endpoint)
 
+        self.custom_endpoints()
+
 
     def _init_crawler_process(self):
         from scrapy.crawler import CrawlerProcess
         self.config['CRAWLER_PROCESS'] = CrawlerProcess()
+
+    def custom_endpoints(self):
+        """
+        method to add user defined endpoints if available. User defined endpoints are to be specified in a file
+        called 'custom_endpoints.py' in the root directory. The method definations are to be in the format:
+            def method_name(**args, url=endpoint_url, method=endpoint_method)
+        where:
+            endpoint_url: A string representing the endpoint url
+            endpoint_method: list containing allowed methods. If none are provided, the endpoint method defaults to GET.
+        :return: None.
+        """
+        try:
+            import custom_endpoints
+        except ModuleNotFoundError:
+            # No custom endpoints file specified
+            return
+
+        endpoints = (fn for fn in getmembers(custom_endpoints) if isfunction(fn[1]) and fn[1].__module__ == custom_endpoints.__name__)
+        for endpoint in endpoints:
+            if callable(endpoint[1]):
+                args = signature(endpoint[1]).parameters
+
+                try:
+                    url = args['url'].default
+                except KeyError:
+                    raise EndpointException('Urls for endpoint "{}" not supplied.'.format(endpoint[0]))
+
+                try:
+                    methods = args['methods'].default
+                except KeyError:
+                    # default method 'GET' is applied.
+                    methods = ['GET']
+
+                allowable_methods = ['PUT', 'GET', 'POST', 'DELETE', 'PATCH']
+                for method in methods:
+                    if method not in allowable_methods:
+                        raise EndpointException('Supplied methods for "{}" endpoint is invalid.'
+                                                'Allowed methods are PUT, GET, POST, DELETE, PATCH'.format(endpoint[0]))
+
+                self.add_url_rule(url, view_func=endpoint[1], methods=methods)
