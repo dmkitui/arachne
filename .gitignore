@@ -8,3 +8,5 @@ build/
 *.egg-info/
 docs/build
 .tox/
+.DS_Store
+.idea/
