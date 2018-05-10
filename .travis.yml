@@ -3,8 +3,7 @@ python:
   - "2.7"
   - "3.6"
 env:
- - TOXENV=py27
- - TOXENV=py36
+ - TOXENV=scrapy-1.5.0
 install:
   - pip install tox
 script: tox
