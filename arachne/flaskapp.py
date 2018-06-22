@@ -131,7 +131,7 @@ class Arachne(Flask):
 
         try:
             import custom_endpoints as custom_endpoint_file
-        except ModuleNotFoundError:
+        except ImportError:
             # No custom endpoints file specified
             return
 
