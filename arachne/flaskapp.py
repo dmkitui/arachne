@@ -4,7 +4,8 @@ from flask import Flask
 from scrapy import version_info as SCRAPY_VERSION
 from arachne.exceptions import SettingsException, EndpointException
 from arachne.endpoints import list_spiders_endpoint, run_spider_endpoint
-from inspect import getmembers, isfunction, signature
+from inspect import getmembers, isfunction
+from funcsigs import signature
 
 
 def endpoint_evaluator(endpoint):
