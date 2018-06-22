@@ -20,7 +20,6 @@ lxml==4.2.1
 MarkupSafe==1.0
 marshmallow==2.15.1
 mysqlclient==1.3.12
-nose2==0.7.4
 parsel==1.4.0
 psycopg2==2.7.4
 psycopg2-binary==2.7.4
