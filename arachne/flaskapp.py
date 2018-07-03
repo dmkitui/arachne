@@ -139,8 +139,8 @@ class Arachne(Flask):
 
     def add_custom_endpoints(self, custom_endpoint_file):
         """
-        method to add user defined endpoints if available. User defined endpoints are to be specified in a file
-        called 'custom_endpoints.py' in the root directory. The method definations are to be in the format:
+        Method to add user defined endpoints if available. User defined endpoints are to be specified in a file
+        called 'custom_endpoints.py' in the root directory. The method definitions are to be in the format:
             def method_name(**args, url=endpoint_url, method=endpoint_method)
         where:
             endpoint_url: A string representing the endpoint url
