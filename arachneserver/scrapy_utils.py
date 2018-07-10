@@ -60,10 +60,10 @@ def get_spider_settings(flask_app_config, spider_scrapy_settings):
         all_settings['EXTENSIONS'] = {}
 
     if flask_app_config['EXPORT_JSON']:
-        all_settings['EXTENSIONS']['arachne.extensions.ExportJSON'] = 100
+        all_settings['EXTENSIONS']['arachneserver.extensions.ExportJSON'] = 100
 
     if flask_app_config['EXPORT_CSV']:
-        all_settings['EXTENSIONS']['arachne.extensions.ExportCSV'] = 200
+        all_settings['EXTENSIONS']['arachneserver.extensions.ExportCSV'] = 200
 
     # spider scrapy settings has priority over global scrapy settings
     # This updates the all_settings dict with values from spider_scrapy_settings, if provided.

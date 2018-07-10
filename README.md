@@ -21,13 +21,14 @@ You can install **ArachneServer** from pip
 
 Sample settings
 ===============
-This is sample settings file for spiders in your project. The settings file should be called **settings.py** for **Arachne** to find it and looks like this::
+This is sample settings file for spiders in your project. The settings file should be called **settings.py** in the root of your project for **ArachneServer** to find it and looks like this::
 
 	# settings.py file
 	SPIDER_SETTINGS = [
 		{
 			'endpoint': 'dmoz',
 			'location': 'spiders.DmozSpider',
+			'endpoints_location: 'spiders.DmozSpider_endpoints'
 			'spider': 'DmozSpider'    
 		}
 	]
@@ -49,4 +50,13 @@ It looks very similar to a flask app but since **Scrapy** depends on the python 
 
 	if __name__ == '__main__':
 		reactor.run()
+
+Endpoints
+=========
+
+Two default endpoints are provided for every spider:
+   1. **'/'** - List all spiders.
+   2. **'/run-spider/<spider_name>'** - To run the specified spider.
+
+Specify additional endpoints for each spider and update the respective SPIDER_SETTINGS dictionary's `endpoints_location` to point to the correct path to the endpoints file.
 

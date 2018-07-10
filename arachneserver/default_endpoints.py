@@ -1,5 +1,5 @@
 from flask import current_app as app, jsonify, abort, request
-from arachne.scrapy_utils import start_crawler
+from arachneserver.scrapy_utils import start_crawler
 
 
 def list_spiders_endpoint():

@@ -2,7 +2,7 @@
 TELNETCONSOLE_PORT = None
 
 # Crawl responsibly
-USER_AGENT = "Arachne (+http://github.com/kirankoduru/arachne)"
+USER_AGENT = "ArachneServer (+http://github.com/kirankoduru/arachne)"
 
 # Export data to JSON or CSV
 EXPORT_PATH = 'exports/'

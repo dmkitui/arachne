@@ -8,13 +8,13 @@ install_requires = [
 ]
 
 setup(
-    name='Arachne',
-    version='0.5.0',
-    author='Kiran Koduru',
-    author_email='kiranrkoduru@gmail.com',
+    name='ArachneServer',
+    version='1.0.0',
+    author='dmkitui',
+    author_email='dmkitui@gmail.com',
     packages=find_packages(),
-    test_suite='arachne.tests',
-    url='https://github.com/kirankoduru/arachne',
+    test_suite='arachneserver.tests',
+    url='https://github.com/dmkitui/arachne',
     license='BSD',
     description='API for Scrapy spiders',
     long_description=open('README.rst').read(),
