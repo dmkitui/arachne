@@ -1,11 +1,8 @@
-=======
 ArachneServer
 =======
-.. image:: https://travis-ci.org/dmkitui/arachne.svg
-    :target: https://travis-ci.org/dmkitui/arachne
+[![Build Status](https://travis-ci.org/dmkitui/arachneserver.svg?branch=master)](https://travis-ci.org/dmkitui/arachneserver)
 
-.. image:: https://coveralls.io/repos/github/dmkitui/arachne/badge.svg?branch=master
-    :target: https://coveralls.io/github/dmkitui/arachne?branch=master
+[![Coverage Status](https://coveralls.io/repos/github/dmkitui/arachne/badge.svg?branch=master)](https://coveralls.io/github/dmkitui/arachne?branch=master)
 
 
 
