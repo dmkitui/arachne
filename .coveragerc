@@ -1,6 +1,7 @@
 [run]
-include=arachne/*
+include=arachneserver/*
 omit=
     venv/*
-    tests/*
+    arachneserver/tests/*
     .tox/*
+    setup.py

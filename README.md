@@ -1,9 +1,8 @@
 ArachneServer
 =======
 [![Build Status](https://travis-ci.org/dmkitui/arachneserver.svg?branch=master)](https://travis-ci.org/dmkitui/arachneserver)
-
-[![Coverage Status](https://coveralls.io/repos/github/dmkitui/arachneserver/badge.svg?branch=master)](https://coveralls.io/github/dmkitui/arachneserver?branch=master)
-
+[![Coverage Status](https://coveralls.io/repos/github/dmkitui/arachneserver/badge.svg?branch=ch-improve-test-coverage)](https://coveralls.io/github/dmkitui/arachneserver?branch=ch-improve-test-coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/637b135299638812096d/maintainability)](https://codeclimate.com/github/dmkitui/arachneserver/maintainability)
 
 ArachneServer provides a wrapper around your scrapy ``Spider`` object to run them through a flask app. All you have to do is customize ``SPIDER_SETTINGS`` in the settings file.
 

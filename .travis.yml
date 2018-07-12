@@ -6,6 +6,8 @@ env:
  - TOXENV=scrapy-1.5.0
 install:
   - pip install tox-travis
-script: tox
-after_success: coveralls
-
+  - pip install python-coveralls
+script:
+  - tox
+after_success:
+  - coveralls

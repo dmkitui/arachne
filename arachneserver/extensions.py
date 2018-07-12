@@ -1,10 +1,6 @@
 from scrapy import signals
-from scrapy import version_info as SCRAPY_VERSION
+from scrapy.exporters import CsvItemExporter, JsonItemExporter
 
-if SCRAPY_VERSION <= (1, 0, 0):
-    from scrapy.contrib.exporter import CsvItemExporter, JsonItemExporter
-else:
-    from scrapy.exporters import CsvItemExporter, JsonItemExporter
 
 class ExportData(object):
 
@@ -32,6 +28,7 @@ class ExportData(object):
         self.exporter.export_item(item)
         return item
 
+
 class ExportCSV(ExportData):
     """
     Exporting to export/csv/spider-name.csv file
@@ -41,6 +38,7 @@ class ExportCSV(ExportData):
         self.files[spider] = file_to_save
         self.exporter = CsvItemExporter(file_to_save)
         self.exporter.start_exporting()
+
 
 class ExportJSON(ExportData):
     """

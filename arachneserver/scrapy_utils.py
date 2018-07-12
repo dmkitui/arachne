@@ -1,14 +1,10 @@
-from scrapy import version_info as SCRAPY_VERSION
+import sys
 from scrapy.utils.misc import load_object
 from scrapy.settings import Settings
+from datetime import datetime
+from twisted.python import logfile, log as tlog
+from scrapy.crawler import CrawlerProcess
 
-if SCRAPY_VERSION <= (1, 0, 0):
-    import sys
-    import logging
-    from datetime import datetime
-    from twisted.python import logfile, log as tlog
-    from scrapy.crawler import Crawler
-    from scrapy.log import ScrapyFileLogObserver
 
 def create_crawler_object(spider_, settings_):
     """
@@ -21,10 +17,10 @@ def create_crawler_object(spider_, settings_):
     Returns:
         A scrapy crawler class object
     """
-    crwlr = Crawler(settings_)
-    crwlr.configure()
+    crwlr = CrawlerProcess(settings_)
     crwlr.crawl(spider_)
     return crwlr
+
 
 def start_logger(debug):
     """
@@ -36,8 +32,8 @@ def start_logger(debug):
     else:
         filename = datetime.now().strftime("%Y-%m-%d.scrapy.log")
         logfile_ = logfile.LogFile(filename, 'logs/', maxRotatedFiles=100)
-        logger = ScrapyFileLogObserver(logfile_, logging.INFO)
-        tlog.addObserver(logger.emit)
+        logger = tlog.PythonLoggingObserver('twisted')
+        logger.start()
 
 def get_spider_settings(flask_app_config, spider_scrapy_settings):
     """
@@ -78,12 +74,5 @@ def start_crawler(spider_loc, flask_app_config, spider_scrapy_settings):
     spider = load_object(spider_loc)
     settings = get_spider_settings(flask_app_config, spider_scrapy_settings)
 
-    if SCRAPY_VERSION <= (1, 0, 0):
-        start_logger(flask_app_config['DEBUG'])
-        crawler = create_crawler_object(spider(), settings)
-        crawler.start()
-
-    else:
-        spider.custom_settings = settings
-        flask_app_config['CRAWLER_PROCESS'].crawl(spider)
-
+    spider.custom_settings = settings
+    flask_app_config['CRAWLER_PROCESS'].crawl(spider)

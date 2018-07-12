@@ -98,11 +98,6 @@ class ArachneServer(Flask):
             except:
                 raise
 
-        # overwrite settings with custom environment variable
-        envvar = 'ARACHNE_SETTINGS'
-        if os.environ.get(envvar):
-            self.config.from_envvar(envvar)
-
     def check_dir(self, config_name, export_path, folder):
         """Check if the directory in the config variable exists
         """
