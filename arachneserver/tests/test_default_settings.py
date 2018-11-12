@@ -8,7 +8,7 @@ class TestDefaultSettings(TestCase):
 
         self.assertIsNone(default_settings.TELNETCONSOLE_PORT)
         self.assertEquals(default_settings.USER_AGENT,
-                          'ArachneServer (+http://github.com/kirankoduru/arachne)')
+                          'ArachneServer (+http://github.com/dmkitui/arachneserver)')
         self.assertEquals(default_settings.EXPORT_PATH, 'exports/')
         self.assertFalse(default_settings.EXPORT_JSON)
         self.assertFalse(default_settings.EXPORT_CSV)

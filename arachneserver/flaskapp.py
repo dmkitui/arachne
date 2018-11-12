@@ -1,12 +1,47 @@
 import os
 import sys
 import logging
+import csv
 from flask import Flask
 from arachneserver.exceptions import SettingsException, EndpointException
 from arachneserver.default_endpoints import list_spiders_endpoint, run_spider_endpoint
 from inspect import getmembers, isfunction
 from funcsigs import signature
 from importlib import import_module
+
+SPIDER_STATUS = {}
+
+
+def spiders_info(action=None):
+    """
+    Method to read and load data about spiders that have run or write to file spider statistics of a just completed
+    spider run.
+    :param action: The options are 'read' for reading spider data from file, or 'write' so as to write to file
+    information
+    about a spider that has just completed running. Parameters read or written to file are:
+        spider_name: name of the spider that has ran.
+        last_run: Last time it completed running.
+        avg_time: The time the spider took to complete.
+        exit_code: The reason the spider completed e.g 'finished' - means it completed well.
+        TODO: - Evalutate and document other exit_code 's
+    :return: None.
+    """
+    spider_data_file = os.path.abspath(os.path.dirname(__file__)) + '/spider_data.csv'
+    if action == 'read':
+        with open(spider_data_file, 'r') as csv_file:
+            field_names = ['spider_name', 'last_run', 'avg_time', 'running', 'exit_code']
+            reader = csv.DictReader(csv_file, fieldnames=field_names, delimiter='|')
+            for row in reader:
+                key = row.pop('spider_name', None)
+                SPIDER_STATUS[key] = dict(row)
+
+    elif action == 'write':
+        with open(spider_data_file, 'w') as csv_file:
+            field_names = ['spider_name', 'last_run', 'avg_time', 'running', 'exit_code']
+            csv_writer = csv.DictWriter(csv_file, fieldnames=field_names, delimiter='|')
+            for spider, spider_data, in SPIDER_STATUS.items():
+                spider_data['spider_name'] = spider
+                csv_writer.writerow(spider_data)
 
 
 def endpoint_evaluator(endpoint):
@@ -165,3 +200,5 @@ class ArachneServer(Flask):
     def _init_crawler_process(self):
         from scrapy.crawler import CrawlerProcess
         self.config['CRAWLER_PROCESS'] = CrawlerProcess()
+        spiders_info(action='read')
+        print('LOADED DATA: ', SPIDER_STATUS)

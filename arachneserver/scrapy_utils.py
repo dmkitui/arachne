@@ -35,6 +35,7 @@ def start_logger(debug):
         logger = tlog.PythonLoggingObserver('twisted')
         logger.start()
 
+
 def get_spider_settings(flask_app_config, spider_scrapy_settings):
     """
     For the given settings for each spider create a scrapy Settings object with

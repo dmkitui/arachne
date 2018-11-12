@@ -2,7 +2,7 @@
 TELNETCONSOLE_PORT = None
 
 # Crawl responsibly
-USER_AGENT = "ArachneServer (+http://github.com/kirankoduru/arachne)"
+USER_AGENT = "ArachneServer (+http://github.com/dmkitui/arachneserver)"
 
 # Export data to JSON or CSV
 EXPORT_PATH = 'exports/'
@@ -18,4 +18,8 @@ LOGS_PATH = 'logs/'
 DEBUG = True
 
 # common settings for each spider
-SCRAPY_SETTINGS = {}
+SCRAPY_SETTINGS = {
+    'EXTENSIONS': {
+        'arachneserver.extensions.ApplicationData': 500
+    }
+}
