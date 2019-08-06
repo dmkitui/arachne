@@ -18,6 +18,6 @@ setup(
     url='https://github.com/dmkitui/arachneserver',
     license='BSD',
     description='API for Scrapy spiders',
-    long_description=open('README.rst').read(),
+    long_description=open('README.md').read(),
     install_requires=install_requires,
 )

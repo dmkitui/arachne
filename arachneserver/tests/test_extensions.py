@@ -5,7 +5,7 @@ import inspect
 import sys
 from unittest import TestCase
 from scrapy import signals, Field, Item
-from mock import patch, mock_open, Mock, call
+from mock import patch, mock_open, Mock, call, MagicMock
 from arachneserver.extensions import ExportCSV, ExportData, ExportJSON, ApplicationData
 from scrapy.contrib.exporter import CsvItemExporter, JsonItemExporter
 
@@ -67,21 +67,21 @@ class TestPipelines(TestCase):
 
 
 class TestApplicationDataLoading(TestCase):
-    def test_spider_data(self):
+    @patch.object(ApplicationData, 'spider_closed')
+    def test_spider_data(self, mock_spider_closed):
         sys.modules['SPIDER_STATUS'] = Mock()
         SPIDER_STATUS = {'abc': {'running': False}}
         mock_open_func = mock_open(read_data='{}')
-        stats = Mock()
+        stats = MagicMock()
 
         stats.get_stats = {}
         cls = ApplicationData(stats=stats)
-        spider = Mock()
+        spider = MagicMock()
         spider.name = 'fgh'
 
         with patch('arachneserver.flaskapp.open', mock_open_func):
             cls.spider_opened(spider)
-            cls.spider_closed(spider)
-            print('USER DATA: ', SPIDER_STATUS)
+            mock_spider_closed(spider)
             self.assertEquals(cls.files, {})
 
 

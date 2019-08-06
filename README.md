@@ -1,5 +1,5 @@
 ArachneServer
-=======
+==============
 [![Build Status](https://travis-ci.org/dmkitui/arachneserver.svg?branch=master)](https://travis-ci.org/dmkitui/arachneserver)
 [![Coverage Status](https://coveralls.io/repos/github/dmkitui/arachneserver/badge.svg?branch=master)](https://coveralls.io/github/dmkitui/arachneserver?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/637b135299638812096d/maintainability)](https://codeclimate.com/github/dmkitui/arachneserver/maintainability)

@@ -59,6 +59,7 @@ class ApplicationData(object):
      to file.
     """
     def __init__(self, stats):
+        self.files = {}
         self.stats = stats
 
     @classmethod
