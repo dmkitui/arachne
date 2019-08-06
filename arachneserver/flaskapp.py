@@ -201,4 +201,3 @@ class ArachneServer(Flask):
         from scrapy.crawler import CrawlerProcess
         self.config['CRAWLER_PROCESS'] = CrawlerProcess()
         spiders_info(action='read')
-        print('LOADED DATA: ', SPIDER_STATUS)

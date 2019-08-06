@@ -2,16 +2,19 @@
 To see if we have the right pipelines in place
 """
 import inspect
+import sys
 from unittest import TestCase
 from scrapy import signals, Field, Item
 from mock import patch, mock_open, Mock, call
-from arachneserver.extensions import ExportCSV, ExportData, ExportJSON
+from arachneserver.extensions import ExportCSV, ExportData, ExportJSON, ApplicationData
 from scrapy.contrib.exporter import CsvItemExporter, JsonItemExporter
+
 
 class ScrapyItem(Item):
     field1 = Field()
     field2 = Field()
     field3 = Field()
+
 
 class TestPipelines(TestCase):
 
@@ -61,3 +64,25 @@ class TestPipelines(TestCase):
                 item = ScrapyItem()
                 result = cls.item_scraped(item, spider)
                 self.assertEquals(item, result)
+
+
+class TestApplicationDataLoading(TestCase):
+    def test_spider_data(self):
+        sys.modules['SPIDER_STATUS'] = Mock()
+        SPIDER_STATUS = {'abc': {'running': False}}
+        mock_open_func = mock_open(read_data='{}')
+        stats = Mock()
+
+        stats.get_stats = {}
+        cls = ApplicationData(stats=stats)
+        spider = Mock()
+        spider.name = 'fgh'
+
+        with patch('arachneserver.flaskapp.open', mock_open_func):
+            cls.spider_opened(spider)
+            cls.spider_closed(spider)
+            print('USER DATA: ', SPIDER_STATUS)
+            self.assertEquals(cls.files, {})
+
+
+
