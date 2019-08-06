@@ -9,10 +9,11 @@ install_requires = [
 
 setup(
     name='ArachneServer',
-    version='1.0.0',
+    version='1.0.1',
     author='dmkitui',
     author_email='dmkitui@gmail.com',
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests']),
+    include_package_data=True,
     test_suite='arachneserver.tests',
     url='https://github.com/dmkitui/arachneserver',
     license='BSD',
