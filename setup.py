@@ -1,10 +1,11 @@
 from setuptools import setup, find_packages
 
 install_requires = [
-        "Scrapy>=1.5.0",
-        "Flask>=0.10.1",
-        "Twisted>=15.4.0",
-        "six>=1.10.0"
+    "Scrapy>=1.5.0",
+    "Flask>=0.10.1",
+    "Twisted>=15.4.0",
+    "six>=1.10.0",
+    "funcsigs>=1.0.2"
 ]
 
 setup(
