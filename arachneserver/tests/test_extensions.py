@@ -7,7 +7,7 @@ from unittest import TestCase
 from scrapy import signals, Field, Item
 from mock import patch, mock_open, Mock, call, MagicMock
 from arachneserver.extensions import ExportCSV, ExportData, ExportJSON, ApplicationData
-from scrapy.contrib.exporter import CsvItemExporter, JsonItemExporter
+from scrapy.exporters import CsvItemExporter, JsonItemExporter
 
 
 class ScrapyItem(Item):

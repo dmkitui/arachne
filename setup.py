@@ -4,6 +4,7 @@ install_requires = [
     "Scrapy>=1.5.0",
     "Flask>=0.10.1",
     "Twisted>=15.4.0",
+    "scrapy-user-agents>=0.1.1",
     "six>=1.10.0",
     "funcsigs>=1.0.2"
 ]
