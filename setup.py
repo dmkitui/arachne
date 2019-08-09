@@ -11,7 +11,7 @@ install_requires = [
 
 setup(
     name='ArachneServer',
-    version='1.0.1',
+    version='1.0.2',
     author='dmkitui',
     author_email='dmkitui@gmail.com',
     packages=find_packages(exclude=['tests']),
